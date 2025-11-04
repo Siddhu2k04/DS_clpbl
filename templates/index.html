@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📊 Log File Analyzer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Log File Analyzer</h1>
+
+    <!-- Add Log Form -->
+    <form action="/add" method="post" class="log-form">
+      <input type="text" name="user" placeholder="Enter User ID" required>
+      
+      <select name="action" required>
+        <option value="">Select Action</option>
+        <option value="login">Login</option>
+        <option value="logout">Logout</option>
+        <option value="click">Click</option>
+        <option value="delete">Delete</option>
+        <option value="create">Create</option>
+      </select>
+
+      <button type="submit" class="btn green">➕ Add Log</button>
+    </form>
+
+    <!-- Action Buttons -->
+    <div class="buttons">
+      <a href="/top"><button class="btn blue">🔥 Find Top Active Users</button></a>
+      <a href="/suspicious"><button class="btn red">⚠️ Find Suspicious Users</button></a>
+      <a href="/clear"><button class="btn gray">🗑️ Clear All Logs</button></a>
+    </div>
+
+    <!-- All Logs Table -->
+    <h2>🧾 All Logs</h2>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr><th>User</th><th>Timestamp</th><th>Action</th></tr>
+        </thead>
+        <tbody>
+          {% for log in logs %}
+          <tr>
+            <td>{{ log.user }}</td>
+            <td>{{ log.timestamp }}</td>
+            <td>{{ log.action }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
